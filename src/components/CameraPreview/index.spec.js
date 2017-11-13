@@ -1,11 +1,14 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import QrCodeScanner from './index';
+import CameraPreview from './index';
 
-describe('QrCodeScanner', () => {
+describe('CameraPreview', () => {
   it('should render', () => {
     const component = renderer.create(
-      <QrCodeScanner />
+      <CameraPreview
+        source="blob://someblobl.com"
+        videoRef={f => f}
+      />
     ).toJSON();
     expect(component).toMatchSnapshot();
   });

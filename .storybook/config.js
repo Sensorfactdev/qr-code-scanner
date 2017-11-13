@@ -8,8 +8,9 @@ function loadStories() {
 }
 setOptions({
   name: 'TEMPLATE',
-  url: 'https://sensorfact.nl'
+  url: 'https://sensorfact.nl',
   // downPanelInRight: true,
+  // goFullScreen: true,
 });
 
 function normalizeBodyAndHTML() {

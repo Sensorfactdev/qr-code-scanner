@@ -5312,6 +5312,10 @@ q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
 
+qrcode-reader@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/qrcode-reader/-/qrcode-reader-1.0.4.tgz#95d9bb9e8130800361a96cb5a43124ad1d9e06b8"
+
 qs@6.5.1, qs@^6.5.1, qs@~6.5.1:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"

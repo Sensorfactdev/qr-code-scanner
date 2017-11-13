@@ -1,11 +1,12 @@
 {
-  "name": "component-template",
-  "version": "0.0.0",
-  "description": "Component Template Component",
+  "name": "@sensorfactdev/qr-code-scanner",
+  "version": "1.0.0",
+  "description": "Scan QR codes using the rear camera of a phone inside React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/you/repo.git"
+    "url": "https://gitlab.com/Sensorfact/frontend/qr-code-scanner"
   },
+  "author": "Ramon Gebben <ramon@sensorfact.nl>",
   "license": "MIT",
   "scripts": {
     "prepublish": "npm run build",
@@ -17,7 +18,7 @@
     "publish-storybook": "bash .scripts/publish_storybook.sh"
   },
   "jest-junit": {
-    "suiteName": "Template Tests",
+    "suiteName": "QR code scanner tests",
     "output": "./reports/junit.xml"
   },
   "devDependencies": {
@@ -51,6 +52,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-runtime": "^6.11.6",
     "prop-types": "^15.6.0",
+    "qrcode-reader": "^1.0.4",
     "styled-components": "^2.2.3"
   },
   "main": "dist/index.js",

@@ -1,7 +1,38 @@
-# Component Template Component
-Component Template Component
+# QR Code Scanner
+
+![pipeline status](https://gitlab.com/Sensorfact/frontend/qr-code-scanner/badges/master/pipeline.svg)
 
 ## Usage
+
+```javascript
+import QrCodeScanner from '@sensorfactdev/qr-code-scanner';
+
+const handleScanResult = result => {
+  console.log(result);
+  // {
+  //   "result": "RESULT STRING VALUE",
+  //   "points": [
+  //     {
+  //       "x": 171,
+  //       "y": 445,
+  //       "count": 2,
+  //       "estimatedModuleSize": 3.857142857142857
+  //     },
+  //     // .... more points
+  //   ]
+  // }
+}
+
+const MyApp = () => (
+  <div>
+    <QrCodeScanner
+      onQrCodeScanned={handleScanResult}
+    />
+  </div>
+)
+```
+
+## Development
 
 To start Storybook:
 ```

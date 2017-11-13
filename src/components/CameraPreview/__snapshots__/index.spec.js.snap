@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CameraPreview should render 1`] = `
+<video
+  autoPlay={true}
+  className="sc-bdVaJa UoSJW"
+  src="blob://someblobl.com"
+/>
+`;
