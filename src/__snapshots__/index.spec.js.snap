@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should show the given text 1`] = `
+<button
+  className="sc-bdVaJa hWyAij"
+  onClick={undefined}
+>
+  The Text
+</button>
+`;
