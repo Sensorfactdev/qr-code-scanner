@@ -55,6 +55,13 @@ class QrCodeScanner extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.stream) {
+      this.stream.getTracks()
+        .forEach(track => track.stop());
+    }
+  }
+
   onCreateSnap() {
     const { onQrCodeScanned, width, height } = this.props;
     const context = this.canvas.getContext('2d');
