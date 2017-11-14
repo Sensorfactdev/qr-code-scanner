@@ -1,2 +1,12 @@
+Jenkinsfile
+__mocks__
+coverage
+jest.config.js
+jest.transform.js
+node_modules
+reports
 src
+.travis.yml
+.eslintrc
 .babelrc
+.DS_Store
