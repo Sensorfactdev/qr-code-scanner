@@ -42,6 +42,7 @@ class QrCodeScanner extends Component {
 
       navigator.mediaDevices.getUserMedia(constraints)
         .then((stream) => {
+          this.stream = stream;
           this.setState(() => ({
             streamUrl: createObjectURL(stream),
           }));
@@ -64,7 +65,10 @@ class QrCodeScanner extends Component {
 
     qr.callback = (error, result) => {
       if (error) return raf(this.onCreateSnap);
+
       this.videoTag.pause();
+      this.stream.getTracks()
+        .forEach(track => track.stop());
       return onQrCodeScanned(result);
     };
 
