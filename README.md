@@ -1,6 +1,8 @@
 # QR Code Scanner
 
-![pipeline status](https://gitlab.com/Sensorfact/frontend/qr-code-scanner/badges/master/pipeline.svg)
+[![Build Status](https://travis-ci.org/Sensorfactdev/qr-code-scanner.svg?branch=master)](https://travis-ci.org/Sensorfactdev/qr-code-scanner)
+[![Known Vulnerabilities](https://snyk.io/test/npm/@sensorfactdev/qr-code-scanner/badge.svg)](https://snyk.io/test/npm/@sensorfactdev/qr-code-scanner)
+[![npm version](https://badge.fury.io/js/%40sensorfactdev%2Fqr-code-scanner.svg)](https://badge.fury.io/js/%40sensorfactdev%2Fqr-code-scanner)
 
 ## Usage
 
