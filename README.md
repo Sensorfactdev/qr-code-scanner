@@ -27,10 +27,20 @@ const MyApp = () => (
   <div>
     <QrCodeScanner
       onQrCodeScanned={handleScanResult}
+      width={window.innerWidth}
+      height={window.innerHeight}
     />
   </div>
 )
 ```
+
+### Props
+
+| Key             | Type     | Default Value        |
+|:----------------|:---------|:---------------------|
+| onQrCodeScanned | Function | `console.log`        |
+| width           | Number   | `window.innerWidth`  |
+| height          | Number   | `window.innerHeight` |
 
 ## Development
 
