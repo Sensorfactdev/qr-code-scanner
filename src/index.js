@@ -78,7 +78,7 @@ class QrCodeScanner extends Component {
     if (error) {
       return (
         <Wrapper>
-          An error occured:
+          An error occurred:
           <pre>
             {error.toString()}
           </pre>
