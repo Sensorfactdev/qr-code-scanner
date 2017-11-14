@@ -6,13 +6,10 @@ const InnerCameraPreview = styled.video`
   width: 100%;
 `;
 
-
 const CameraPreview = ({ source, videoRef }) => (
   <InnerCameraPreview
     autoPlay
-    innerRef={(el) => {
-      videoRef(el);
-    }}
+    innerRef={(el) => { videoRef(el); }}
     src={source}
   />
 );

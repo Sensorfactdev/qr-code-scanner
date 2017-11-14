@@ -4,27 +4,12 @@ import raf from 'raf';
 import styled from 'styled-components';
 import QrCode from 'qrcode-reader';
 
+import CameraWrapper from './components/CameraWrapper';
 import CameraPreview from './components/CameraPreview';
+import HiddenCanvas from './components/HiddenCanvas';
 
 const Wrapper = styled.div`
   position: relative;
-`;
-
-const CameraWrapper = styled.div`
-  &:after {
-    content: "";
-    display: block;
-    position: fixed;
-    top: 30%; left: 25%;
-    width: 50%; height: 25%;
-    border: 5px solid limegreen;
-  }
-`;
-
-const HiddenCanvas = styled.canvas`
-  display: none;
-  width: ${window.innerWidth}px; height: ${window.innerHeight}px;
-  border: 1px solid green;
 `;
 
 class QrCodeScanner extends Component {
@@ -42,41 +27,39 @@ class QrCodeScanner extends Component {
     const {
       navigator,
       URL: { createObjectURL },
-      innerHeight,
-      innerWidth,
     } = global.window;
+    const { width, height } = this.props;
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       const constraints = {
         audio: false,
         video: {
-          width: innerWidth,
-          height: innerHeight,
+          width,
+          height,
           aspectRatio: 1.5,
           facingMode: 'environment',
         },
       };
 
-      navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-        this.setState(() => ({
-          streamUrl: createObjectURL(stream),
-        }));
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+          this.setState(() => ({
+            streamUrl: createObjectURL(stream),
+          }));
 
-        raf(this.onCreateSnap);
-      })
-      .catch((error) => {
-        this.setState(() => ({
-          error,
-        }));
-      });
+          raf(this.onCreateSnap);
+        })
+        .catch((error) => {
+          this.setState(() => ({ error }));
+        });
     }
   }
 
   onCreateSnap() {
-    const { onQrCodeScanned } = this.props;
+    const { onQrCodeScanned, width, height } = this.props;
     const context = this.canvas.getContext('2d');
     const qr = new QrCode();
 
-    context.drawImage(this.videoTag, 0, 0, window.innerWidth, window.innerHeight);
+    context.drawImage(this.videoTag, 0, 0, width, height);
     const imageData = this.canvas.toDataURL('image/png');
 
     qr.callback = (error, result) => {
@@ -90,11 +73,12 @@ class QrCodeScanner extends Component {
 
   render() {
     const { streamUrl, error } = this.state;
+    const { width, height } = this.props;
 
     if (error) {
       return (
         <Wrapper>
-          Rear camera not available
+          An error occured:
           <pre>
             {error.toString()}
           </pre>
@@ -110,7 +94,7 @@ class QrCodeScanner extends Component {
               videoRef={(el) => { this.videoTag = el; }}
               source={streamUrl}
             />
-            <HiddenCanvas innerRef={(el) => { this.canvas = el; }} width="640" height="480" />
+            <HiddenCanvas innerRef={(el) => { this.canvas = el; }} width={width} height={height} />
           </CameraWrapper>
         }
       </Wrapper>
@@ -120,10 +104,14 @@ class QrCodeScanner extends Component {
 
 QrCodeScanner.propTypes = {
   onQrCodeScanned: PropTypes.func.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 QrCodeScanner.defaultProps = {
   onQrCodeScanned: result => console && console.log('RESULT', result),
+  width: global.window ? global.window.innerWidth : 360,
+  height: global.window ? global.window.innerHeight : 480,
 };
 
 export default QrCodeScanner;

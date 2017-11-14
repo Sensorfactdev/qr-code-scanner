@@ -2,6 +2,12 @@
 
 exports[`QrCodeScanner should render 1`] = `
 <div
-  className="sc-bwzfXH ghuPdm"
+  className="sc-bxivhb cdiCYE"
+/>
+`;
+
+exports[`QrCodeScanner should render with passed width and height 1`] = `
+<div
+  className="sc-bxivhb cdiCYE"
 />
 `;
