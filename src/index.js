@@ -35,7 +35,7 @@ class QrCodeScanner extends Component {
         video: {
           width,
           height,
-          aspectRatio: 1.5,
+          aspectRatio: width / height,
           facingMode: 'environment',
         },
       };
@@ -67,7 +67,7 @@ class QrCodeScanner extends Component {
     const context = this.canvas.getContext('2d');
     const qr = new QrCode();
 
-    context.drawImage(this.videoTag, 0, 0, width, height);
+    context.drawImage(this.videoTag, 0, 0, width, height, 0, 0, width, height);
     const imageData = this.canvas.toDataURL('image/png');
 
     qr.callback = (error, result) => {
@@ -91,8 +91,10 @@ class QrCodeScanner extends Component {
         <Wrapper>
           An error occurred:
           <pre>
-            {error.toString()}
+            {error.name}
+            {error.message}
           </pre>
+          Try a different phone
         </Wrapper>
       );
     }
@@ -105,7 +107,11 @@ class QrCodeScanner extends Component {
               videoRef={(el) => { this.videoTag = el; }}
               source={streamUrl}
             />
-            <HiddenCanvas innerRef={(el) => { this.canvas = el; }} width={width} height={height} />
+            <HiddenCanvas
+              innerRef={(el) => { this.canvas = el; }}
+              width={width}
+              height={height}
+            />
           </CameraWrapper>
         }
       </Wrapper>
