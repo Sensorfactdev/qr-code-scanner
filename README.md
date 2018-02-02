@@ -32,6 +32,7 @@ const MyApp = () => (
       onQrCodeScanned={handleScanResult}
       width={window.innerWidth}
       height={window.innerHeight}
+      showAimAssist // Defaults to true, disable to remove the aim assist
     />
   </div>
 )
