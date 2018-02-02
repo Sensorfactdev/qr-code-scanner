@@ -64,10 +64,13 @@ class QrCodeScanner extends Component {
 
   onCreateSnap() {
     const { onQrCodeScanned, width, height } = this.props;
-    const context = this.canvas.getContext('2d');
     const qr = new QrCode();
+    const context = this.canvas && this.canvas.getContext('2d');
 
-    context.drawImage(this.videoTag, 0, 0, width, height, 0, 0, width, height);
+    if (context) {
+      context.drawImage(this.videoTag, 0, 0, width, height, 0, 0, width, height);
+    }
+
     const imageData = this.canvas.toDataURL('image/png');
 
     qr.callback = (error, result) => {
@@ -84,7 +87,7 @@ class QrCodeScanner extends Component {
 
   render() {
     const { streamUrl, error } = this.state;
-    const { width, height } = this.props;
+    const { width, height, showAimAssist } = this.props;
 
     if (error) {
       return (
@@ -102,7 +105,9 @@ class QrCodeScanner extends Component {
     return (
       <Wrapper innerRef={(el) => { this.wrapper = el; }}>
         {streamUrl &&
-          <CameraWrapper>
+          <CameraWrapper
+            showAimAssist={showAimAssist}
+          >
             <CameraPreview
               videoRef={(el) => { this.videoTag = el; }}
               source={streamUrl}
@@ -123,12 +128,14 @@ QrCodeScanner.propTypes = {
   onQrCodeScanned: PropTypes.func.isRequired,
   width: PropTypes.number,
   height: PropTypes.number,
+  showAimAssist: PropTypes.bool,
 };
 
 QrCodeScanner.defaultProps = {
   onQrCodeScanned: result => console && console.log('RESULT', result),
   width: global.window ? global.window.innerWidth : 360,
   height: global.window ? global.window.innerHeight : 480,
+  showAimAssist: true,
 };
 
 export default QrCodeScanner;

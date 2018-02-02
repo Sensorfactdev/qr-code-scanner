@@ -5,7 +5,7 @@ export default styled.div`
 
   &:after {
     content: "";
-    display: block;
+    display: ${({ showAimAssist }) => showAimAssist ? 'block' : 'none'};
     position: absolute;
     top: 30%; left: 25%;
     width: 50%; height: 25%;
