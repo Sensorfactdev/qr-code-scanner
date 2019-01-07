@@ -17,7 +17,7 @@ class QrCodeScanner extends Component {
     super(props);
 
     this.state = {
-      objectUrl: null,
+      streamObject: null,
     };
 
     this.bindVideoStream = this.bindVideoStream.bind(this);
@@ -45,7 +45,7 @@ class QrCodeScanner extends Component {
         .then((stream) => {
           this.stream = stream;
           this.setState(() => ({
-            objectUrl: stream,
+            streamObject: stream,
           }));
 
           raf(this.onCreateSnap);
@@ -97,7 +97,7 @@ class QrCodeScanner extends Component {
   }
 
   render() {
-    const { objectUrl, error } = this.state;
+    const { streamObject, error } = this.state;
     const { width, height, showAimAssist } = this.props;
 
     if (error) {
@@ -115,7 +115,7 @@ class QrCodeScanner extends Component {
 
     return (
       <Wrapper innerRef={(el) => { this.wrapper = el; }}>
-        {objectUrl &&
+        {streamObject &&
           <CameraWrapper
             showAimAssist={showAimAssist}
           >
