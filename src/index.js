@@ -17,18 +17,19 @@ class QrCodeScanner extends Component {
     super(props);
 
     this.state = {
-      streamUrl: null,
+      objectUrl: null,
     };
 
+    this.bindVideoStream = this.bindVideoStream.bind(this);
     this.onCreateSnap = this.onCreateSnap.bind(this);
   }
 
   componentDidMount() {
     const {
       navigator,
-      URL: { createObjectURL },
     } = global.window;
     const { width, height } = this.props;
+
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       const constraints = {
         audio: false,
@@ -44,7 +45,7 @@ class QrCodeScanner extends Component {
         .then((stream) => {
           this.stream = stream;
           this.setState(() => ({
-            streamUrl: createObjectURL(stream),
+            objectUrl: stream,
           }));
 
           raf(this.onCreateSnap);
@@ -53,6 +54,8 @@ class QrCodeScanner extends Component {
           this.setState(() => ({ error }));
         });
     }
+
+    raf(this.bindVideoStream);
   }
 
   componentWillUnmount() {
@@ -85,8 +88,16 @@ class QrCodeScanner extends Component {
     qr.decode(imageData);
   }
 
+  bindVideoStream() {
+    if (typeof this.videoTag !== 'undefined') {
+      return (this.videoTag.srcObject = this.stream);
+    }
+
+    return raf(this.bindVideoStream);
+  }
+
   render() {
-    const { streamUrl, error } = this.state;
+    const { objectUrl, error } = this.state;
     const { width, height, showAimAssist } = this.props;
 
     if (error) {
@@ -104,13 +115,12 @@ class QrCodeScanner extends Component {
 
     return (
       <Wrapper innerRef={(el) => { this.wrapper = el; }}>
-        {streamUrl &&
+        {objectUrl &&
           <CameraWrapper
             showAimAssist={showAimAssist}
           >
             <CameraPreview
               videoRef={(el) => { this.videoTag = el; }}
-              source={streamUrl}
             />
             <HiddenCanvas
               innerRef={(el) => { this.canvas = el; }}
