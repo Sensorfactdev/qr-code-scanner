@@ -89,7 +89,7 @@ class QrCodeScanner extends Component {
   }
 
   bindVideoStream() {
-    if (typeof this.videoTag !== 'undefined') {
+    if (this.videoTag != null) {
       return (this.videoTag.srcObject = this.stream);
     }
 
