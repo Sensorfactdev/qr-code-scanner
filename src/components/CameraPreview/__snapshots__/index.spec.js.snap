@@ -4,6 +4,5 @@ exports[`CameraPreview should render 1`] = `
 <video
   autoPlay={true}
   className="sc-bdVaJa fePDys"
-  src="blob://someblobl.com"
 />
 `;
